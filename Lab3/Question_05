@@ -1,0 +1,141 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+#define MAX_PRODUCTS 100
+
+struct Product {
+    string productName;
+    double productPrice;
+};
+
+class Supermarket {
+private:
+    Product* productList;
+    int itemCount;
+
+public:
+    Supermarket() {
+        productList = new Product[MAX_PRODUCTS];
+        itemCount = 0;
+    }
+
+    ~Supermarket() {
+        delete[] productList;
+    }
+
+    void addProduct(string pName, double pPrice) {
+        if (itemCount >= MAX_PRODUCTS) {
+            cout << "The stock is full!\n";
+            return;
+        }
+        productList[itemCount].productName = pName;
+        productList[itemCount].productPrice = pPrice;
+        itemCount++;
+        cout << "Product Added: " << pName << " - Rs. " << pPrice << "\n";
+    }
+
+    void modifyProduct(string pName, double pPrice) {
+        for (int i = 0; i < itemCount; i++) {
+            if (productList[i].productName == pName) {
+                productList[i].productPrice = pPrice;
+                cout << "Price updated for " << pName << " to Rs. " << pPrice << "\n";
+                return;
+            }
+        }
+        cout << "Product not found in stock.\n";
+    }
+
+    void showInventory() {
+        if (itemCount == 0) {
+            cout << "The stock is currently empty.\n";
+            return;
+        }
+        cout << "Product List:\n";
+        for (int i = 0; i < itemCount; i++) {
+            cout << productList[i].productName << " - Rs. " << productList[i].productPrice << "\n";
+        }
+    }
+
+    void printInvoice() {
+        if (itemCount == 0) {
+            cout << "The stock is currently empty.\n";
+            return;
+        }
+
+        double totalAmount = 0.0;
+        string productInput;
+        char addMore;
+
+        cout << "Invoice Generation...\n";
+
+        while (true) {
+            cout << "Enter product name: ";
+            getline(cin, productInput);
+
+            bool found = false;
+
+            for (int i = 0; i < itemCount; i++) {
+                if (productList[i].productName == productInput) {
+                    found = true;
+                    totalAmount += productList[i].productPrice;
+                    cout << "Added: " << productInput << " - Rs. " << productList[i].productPrice << "\n";
+                    break;
+                }
+            }
+
+            if (!found) {
+                cout << "Product '" << productInput << "' is not available in stock.\n";
+            }
+
+            cout << "Would you like to add another product? (y/n): ";
+            cin >> addMore;
+
+            if (addMore == 'n' || addMore == 'N') {
+                break;
+            }
+            cin.ignore();
+        }
+        cout << "\nTotal Amount: Rs. " << totalAmount << "\n";
+    }
+};
+
+int main() {
+    Supermarket market;
+    int userChoice;
+    string productName;
+    double productPrice;
+
+    while (true) {
+        cout << "\nMain Menu:\n1. Add Product\n2. Modify Product Price\n3. View Stock\n4. Generate Invoice\n5. Exit\nEnter your choice: ";
+        cin >> userChoice;
+
+        switch (userChoice) {
+        case 1:
+            cout << "Enter product name: ";
+            cin >> productName;
+            cout << "Enter product price: ";
+            cin >> productPrice;
+            market.addProduct(productName, productPrice);
+            break;
+        case 2:
+            cout << "Enter product name: ";
+            cin >> productName;
+            cout << "Enter new price: ";
+            cin >> productPrice;
+            market.modifyProduct(productName, productPrice);
+            break;
+        case 3:
+            market.showInventory();
+            break;
+        case 4:
+            market.printInvoice();
+            break;
+        case 5:
+            cout << "Goodbye! Exiting the system...\n";
+            return 0;
+        default:
+            cout << "Invalid option! Please try again.\n";
+        }
+    }
+}

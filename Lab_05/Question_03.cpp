@@ -1,4 +1,4 @@
-// Muhammad Abdullah 24K0977 - OOP Lab 05 Question 02
+// Muhammad Abdullah 24K0977 - OOP Lab 05 Question 03
 
 #include <iostream>
 using namespace std;

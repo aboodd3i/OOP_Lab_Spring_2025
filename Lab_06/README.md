@@ -7,3 +7,5 @@
 # Question 03:
 ![image](https://github.com/user-attachments/assets/eea84c57-3dc1-4015-9747-62acf9749738)
 
+# Question 04:
+![image](https://github.com/user-attachments/assets/6739c2ee-a518-492d-adbb-1393025d9728)

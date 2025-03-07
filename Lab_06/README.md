@@ -9,3 +9,6 @@
 
 # Question 04:
 ![image](https://github.com/user-attachments/assets/6739c2ee-a518-492d-adbb-1393025d9728)
+
+# Question 05:
+![image](https://github.com/user-attachments/assets/2b78afbf-0308-431e-88e0-d291e07ff3dc)
